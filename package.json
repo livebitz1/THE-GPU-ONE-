@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@geist-ui/react": "^2.2.5",
     "@react-three/fiber": "^9.1.2",
+    "@vercel/og": "^0.6.8",
     "axios": "^1.6.0",
     "chart.js": "^4.0.0",
     "date-fns": "^3.0.0",

@@ -19,13 +19,43 @@
   --transition-slow: 0.5s ease;
   --transition-medium: 0.3s ease;
   --transition-fast: 0.15s ease;
+  
+  /* Font family variables */
+  --font-primary: var(--font-outfit), system-ui, sans-serif;
+  --font-heading: var(--font-space-grotesk), var(--font-outfit), system-ui, sans-serif;
+  --font-ui: var(--font-inter), var(--font-outfit), system-ui, sans-serif;
+  --font-code: var(--font-roboto-mono), 'SF Mono', 'Fira Code', monospace;
+  
+  /* Typography scale with better visual hierarchy */
+  --fs-xs: clamp(0.7rem, 0.7rem + 0.05vw, 0.75rem);
+  --fs-sm: clamp(0.8rem, 0.8rem + 0.05vw, 0.875rem);
+  --fs-base: clamp(1rem, 1rem + 0.05vw, 1.05rem);
+  --fs-lg: clamp(1.125rem, 1.125rem + 0.1vw, 1.25rem);
+  --fs-xl: clamp(1.25rem, 1.25rem + 0.15vw, 1.5rem);
+  --fs-2xl: clamp(1.5rem, 1.5rem + 0.25vw, 1.875rem);
+  --fs-3xl: clamp(1.875rem, 1.875rem + 0.5vw, 2.5rem);
+  --fs-4xl: clamp(2.25rem, 2.25rem + 0.75vw, 3.25rem);
+  --fs-5xl: clamp(3rem, 3rem + 1vw, 4rem);
+  --fs-6xl: clamp(3.75rem, 3.75rem + 1.5vw, 5rem);
+  
+  /* Advanced typography settings */
+  --leading-tight: 1.1;
+  --leading-snug: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-primary);
+  --font-mono: var(--font-code);
 }
 
 @keyframes pulse {
@@ -54,16 +84,74 @@
   100% { transform: translateY(0px); }
 }
 
+@keyframes rotate3d {
+  0% { transform: perspective(1000px) rotateX(0deg) rotateY(0deg); }
+  25% { transform: perspective(1000px) rotateX(5deg) rotateY(10deg); }
+  50% { transform: perspective(1000px) rotateX(0deg) rotateY(0deg); }
+  75% { transform: perspective(1000px) rotateX(-5deg) rotateY(-10deg); }
+  100% { transform: perspective(1000px) rotateX(0deg) rotateY(0deg); }
+}
+
+@keyframes hover3d {
+  0% { transform: translateZ(0px); }
+  50% { transform: translateZ(20px); }
+  100% { transform: translateZ(0px); }
+}
+
+@keyframes glowPulse {
+  0% { filter: drop-shadow(0 0 5px rgba(0, 246, 255, 0.3)); }
+  50% { filter: drop-shadow(0 0 20px rgba(0, 246, 255, 0.6)); }
+  100% { filter: drop-shadow(0 0 5px rgba(0, 246, 255, 0.3)); }
+}
+
+@keyframes circuitAnimation {
+  0% { opacity: 0; stroke-dashoffset: 1000; }
+  50% { opacity: 1; }
+  100% { opacity: 0; stroke-dashoffset: 0; }
+}
+
+@keyframes floatRotate {
+  0% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-15px) rotate(2deg); }
+  50% { transform: translateY(0px) rotate(0deg); }
+  75% { transform: translateY(15px) rotate(-2deg); } 
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes gpuDataFlow {
+  0% { stroke-dashoffset: 1000; opacity: 0.2; }
+  20% { opacity: 0.8; }
+  80% { opacity: 0.8; }
+  100% { stroke-dashoffset: 0; opacity: 0.2; }
+}
+
+@keyframes matrixRain {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -100% 0; }
+  100% { background-position: 200% 0; }
+}
+
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: var(--font-primary);
+  font-size: var(--fs-base);
+  line-height: var(--leading-normal);
   min-height: 100vh;
   overflow-x: hidden;
+  letter-spacing: -0.01em;
 }
 
 ::-webkit-scrollbar {
@@ -81,6 +169,134 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--neon-purple);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  margin-top: 0;
+}
+
+h1 {
+  font-size: var(--fs-5xl);
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: var(--fs-4xl);
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  font-size: var(--fs-3xl);
+}
+
+h4 {
+  font-size: var(--fs-2xl);
+}
+
+h5 {
+  font-size: var(--fs-xl);
+}
+
+h6 {
+  font-size: var(--fs-lg);
+}
+
+p {
+  font-family: var(--font-primary);
+  line-height: var(--leading-relaxed);
+  margin-bottom: 1.5rem;
+}
+
+small, .text-small {
+  font-size: var(--fs-sm);
+}
+
+.text-xs {
+  font-size: var(--fs-xs);
+}
+
+.text-lg {
+  font-size: var(--fs-lg);
+}
+
+.text-xl {
+  font-size: var(--fs-xl);
+}
+
+.text-2xl {
+  font-size: var(--fs-2xl);
+}
+
+.text-3xl {
+  font-size: var(--fs-3xl);
+}
+
+button, .btn, a.btn {
+  font-family: var(--font-ui);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+pre, code, .terminal, .mono {
+  font-family: var(--font-code);
+  font-feature-settings: "ss02" on, "ss03" on, "ss04" on, "liga" off;
+}
+
+.font-primary {
+  font-family: var(--font-primary);
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-ui {
+  font-family: var(--font-ui);
+}
+
+.font-mono {
+  font-family: var(--font-code);
+}
+
+.tracking-tighter {
+  letter-spacing: var(--tracking-tighter);
+}
+
+.tracking-tight {
+  letter-spacing: var(--tracking-tight);
+}
+
+.tracking-wide {
+  letter-spacing: var(--tracking-wide);
+}
+
+.tracking-wider {
+  letter-spacing: var(--tracking-wider);
+}
+
+.tracking-widest {
+  letter-spacing: var(--tracking-widest);
+}
+
+.leading-tight {
+  line-height: var(--leading-tight);
+}
+
+.leading-snug {
+  line-height: var(--leading-snug);
+}
+
+.leading-normal {
+  line-height: var(--leading-normal);
+}
+
+.leading-relaxed {
+  line-height: var(--leading-relaxed);
 }
 
 .neon-text-blue {
@@ -119,11 +335,13 @@ body {
   background: var(--terminal-bg);
   border-radius: 6px;
   border: 1px solid var(--neon-blue);
-  font-family: var(--font-mono);
+  font-family: var(--font-code);
   color: var(--neon-green);
   padding: 12px;
   overflow: hidden;
   position: relative;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
 }
 
 .terminal::before {
@@ -150,6 +368,48 @@ body {
   animation: float 5s infinite ease-in-out;
 }
 
+.rotate-3d {
+  animation: rotate3d 10s infinite ease-in-out;
+  transform-style: preserve-3d;
+}
+
+.hover-3d {
+  animation: hover3d 6s infinite ease-in-out;
+  transform-style: preserve-3d;
+}
+
+.glow-pulse {
+  animation: glowPulse 3s infinite ease-in-out;
+}
+
+.circuit-animation {
+  stroke-dasharray: 1000;
+  animation: circuitAnimation 8s infinite linear;
+}
+
+.float-rotate {
+  animation: floatRotate 12s infinite ease-in-out;
+}
+
+.gpu-data-flow {
+  stroke-dasharray: 1000;
+  animation: gpuDataFlow 5s infinite linear;
+}
+
+.matrix-rain {
+  animation: matrixRain 20s linear infinite;
+}
+
+.shimmer-effect {
+  background: linear-gradient(90deg, 
+    rgba(0, 246, 255, 0.0) 0%, 
+    rgba(0, 246, 255, 0.3) 50%, 
+    rgba(0, 246, 255, 0.0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite linear;
+}
+
 .loading-bar {
   height: 4px;
   background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
@@ -161,4 +421,25 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.bg-gradient-radial {
+  background-image: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
+.from-neon-blue\/50 {
+  --tw-gradient-from: rgba(0, 246, 255, 0.5);
+  --tw-gradient-to: rgba(0, 246, 255, 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.to-neon-blue\/10 {
+  --tw-gradient-to: rgba(0, 246, 255, 0.1);
 }
